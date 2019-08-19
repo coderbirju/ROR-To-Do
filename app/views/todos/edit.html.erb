@@ -1,0 +1,36 @@
+
+<%= form_with scope: :todos, model: @todos, url: todo_path(@todos), local: true do |form| %> 
+  <% if @todos.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@todos.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @todos.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= form.label :info %><br>
+    <%= form.text_area :info %>
+  </p>
+
+  <p>
+    <%= form.label :status %><br>
+    <%= form.text_field :status,  :value => "Incomplete" %>
+  </p>
+  
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+<td><%= link_to 'Back', todos_path %></td>

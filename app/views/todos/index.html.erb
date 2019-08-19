@@ -1,0 +1,48 @@
+<style>
+h1
+{
+    color: grey;
+    margin: auto;
+    align: center;
+}
+</style>
+
+
+<h1>TODO LIST </h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Todo</th>
+        <th>Status</th>
+        <th>Created time</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <% @todos.each do |todo| %>
+    <tr>
+        <td> <%= todo.title %> </td>
+        <td> <%= todo.info %> </td>
+        <td> <%= todo.status %> </td>
+        <th> <%= todo.created_at.strftime("%a %b %d %I:%M %p") %></th>        
+        <td><%= link_to 'Show', todo_path(todo) %></td>
+        <td>
+            <% if todo.status != "Completed" %>
+            <%=  link_to 'Edit', edit_todo_path(todo) %>
+            <% end %>
+        </td>
+        <td><%= link_to 'Destroy', todo_path(todo),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+        </td>
+
+        <%
+=begin%>
+ <%= todo.created_at.strftime("%a %d %I %p") %> 
+<%
+=end%>
+    </tr>
+    <% end %>
+</table>
+<%= link_to 'New', new_todo_path %>
+
+
